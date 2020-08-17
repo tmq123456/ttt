@@ -1,0 +1,606 @@
+{
+	"pages": [
+		{
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				//"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		},
+		{
+			"path": "pages/car/product",
+			"style": {
+				"navigationBarTitleText": "详情展示",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				// #ifdef MP 
+				"navigationBarTitleText": "大公二手车市场",
+				//"navigationStyle": "custom",
+				// #endif 
+				"app-plus": {
+					"titleNView": {
+						"backgroundColor":"red",
+						// "type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "搜索",
+							"disabled": false,
+							"placeholderColor": "#606266"
+						},
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60d",
+								"fontSize": "26",
+								"color": "white",
+								"float": "left",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "+",
+								"fontSize": "27",
+								"color": "white",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+
+		{
+			"path": "pages/userinfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "基本信息"
+			}
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+		}, {
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/money/money",
+			"style": {}
+		}, {
+			"path": "pages/car/create",
+			"style": {
+				"navigationBarTitleText": "发车"
+			}
+		}, {
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, {
+			"path": "pages/address/addressManage",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/money/pay",
+			"style": {
+				"navigationBarTitleText": "支付"
+			}
+		},
+		{
+			"path": "pages/money/paySuccess",
+			"style": {
+				"navigationBarTitleText": "支付成功"
+			}
+		}
+	    ,{
+            "path" : "pages/notice/notice",
+            "style" : {
+				"navigationBarTitleText": "通知"
+			}
+        }
+        ,{
+            "path" : "pages/category/category",
+            "style" : {
+				"navigationBarTitleText": "勤天汽车",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"backgroundColor":"red",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "搜索",
+							"disabled": false,
+							"placeholderColor": "#606266"
+						},
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "鼎旺精品二手车",
+								"fontSize": "16",
+								"color": "white",
+								"float": "left",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "+",
+								"fontSize": "27",
+								"color": "white",
+								"background": "rgba(0,0,0,0)"
+								// "redDot": true
+							}
+						]
+					}
+				}
+				
+			}
+        }
+        ,{
+            "path" : "pages/car/list",
+            "style" : {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "商品列表",
+				"app-plus": {
+					"titleNView": {
+						"backgroundColor":"white",
+						// "type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231, 231, 231,.7)",
+							"borderRadius": "16px",
+							"placeholder": "搜索",
+							"disabled": false,
+							"placeholderColor": "#606266"
+						}
+					}
+				}
+			}
+        },{
+            "path" : "pages/notice/setnotice",
+            "style" : {
+				"navigationBarTitleText": "通知管理"
+			}
+        },{
+            "path" : "pages/notice/setnotice",
+            "style" : {
+				"navigationBarTitleText": "消息设置"
+			}
+        },{
+            "path" : "pages/notice/noticelist",
+            "style" : {
+				"navigationBarTitleText": "消息",
+				"app-plus": {
+					"bounce": "none",
+					"titleNView":{
+						"backgroundColor":"#C0C4CC"
+					}
+				}
+			}
+        }
+        ,{
+            "path" : "pages/image/image",
+            "style" : {
+				"navigationBarTitleText": "照片管理"
+			}
+        }
+        ,{
+            "path" : "pages/brand/brand",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/customer/customer",
+            "style" : {
+            	"navigationBarTitleText": "客户管理",
+            	"app-plus": {
+            		"bounce": "none",
+            		"titleNView": {
+            			"backgroundColor":"white",
+            			"searchInput": {
+            				"backgroundColor": "rgba(231, 231, 231,.7)",
+            				"borderRadius": "16px",
+            				"placeholder": "客户名称/手机号/意向",
+            				"disabled": false,
+            				"placeholderColor": "#606266"
+            			},
+            			"buttons": [
+            				{
+            					"fontSrc": "/static/yticon.ttf",
+            					"text": "+",
+            					"fontSize": "27",
+            					"color": "grey",
+            					"background": "rgba(0,0,0,0)"
+            					// "redDot": true
+            				}
+            			]
+            		}
+            	}
+            	
+            }
+        },{
+            "path" : "pages/customer/addcustomer",
+            "style" : {
+				"navigationBarTitleText": "新建客户"
+			}
+        },{
+            "path" : "pages/car/info",
+            "style" : {
+				"navigationBarTitleText": "基础信息",
+				"app-plus": {
+							"titleNView": {
+								"buttons": [{
+										"fontSrc": "/static/yticon.ttf",
+										"text": "编辑",
+										"fontSize": "16",
+										"color": "black",
+										"float": "right",
+										"background": "rgba(0,0,0,0)"
+									}
+								]
+							}
+				
+				}
+			}
+        },{
+            "path" : "pages/car/editor",
+            "style" : {
+				"navigationBarTitleText": "基础信息"
+			}
+        },{
+            "path" : "pages/car/parameter",
+            "style" : {
+            	"navigationBarTitleText": "基础信息",
+            	"app-plus": {
+            				"titleNView": {
+            					"buttons": [{
+            							"fontSrc": "/static/yticon.ttf",
+            							"text": "编辑",
+            							"fontSize": "16",
+            							"color": "black",
+            							"float": "right",
+            							"background": "rgba(0,0,0,0)"
+            						}
+            					]
+            				}
+            	
+            	}
+            }
+        },{
+            "path" : "pages/car/addparameter",
+            "style" : {
+				"navigationBarTitleText": "参数配置"
+			}
+        }
+        ,{
+            "path" : "pages/car/outfit",
+            "style" : {
+				"navigationBarTitleText": "整备详情"
+			}
+        },{
+            "path" : "pages/car/editoutfit",
+            "style" : {
+				"navigationBarTitleText": "整备总览"
+			}
+        },{
+            "path" : "pages/car/editoutfitorder",
+            "style" : {
+				"navigationBarTitleText": "编辑整备工单"
+			}
+        },{
+            "path" : "pages/car/outfitorderdetail",
+            "style" : {
+				"navigationBarTitleText": "整备工单",
+				"app-plus": {
+							"titleNView": {
+								"buttons": [{
+										"fontSrc": "/static/yticon.ttf",
+										"text": "编辑",
+										"fontSize": "16",
+										"color": "black",
+										"float": "right",
+										"background": "rgba(0,0,0,0)"
+									}
+								]
+							}
+				
+				}
+			}
+        },{
+            "path" : "pages/car/license",
+            "style" : {
+				"navigationBarTitleText": "牌证详情"
+			}
+        },{
+            "path" : "pages/car/editlicense",
+            "style" : {
+				"navigationBarTitleText": "采购过户"
+			}
+        },{
+            "path" : "pages/car/editlicensebuy",
+            "style" : {
+				"navigationBarTitleText": "销售过户"
+			}
+        },{
+            "path" : "pages/car/content",
+            "style" : {
+				"navigationBarTitleText": "车况描述"
+			}
+        }
+        ,{
+            "path" : "pages/reportform/reportform",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/task/task",
+		   "style" : {
+			"navigationBarTitleText": "任务管理"
+		   }
+        }
+		,{
+		    "path" : "pages/userinfo/weixin",
+		   "style" : {
+		   	"navigationBarTitleText": "微信",
+		   	"app-plus": {
+		   				"titleNView": {
+		   					"buttons": [{
+		   							"fontSrc": "/static/yticon.ttf",
+		   							"text": "保存",
+		   							"fontSize": "16",
+		   							"color": "black",
+		   							"float": "right",
+		   							"background": "rgba(0,0,0,0)"
+		   						}
+		   					]
+		   				}
+		   	
+		   	}
+		   }
+		}
+		,{
+		    "path" : "pages/userinfo/qq",
+		   "style" : {
+		   	"navigationBarTitleText": "QQ",
+		   	"app-plus": {
+		   				"titleNView": {
+		   					"buttons": [{
+		   							"fontSrc": "/static/yticon.ttf",
+		   							"text": "保存",
+		   							"fontSize": "16",
+		   							"color": "black",
+		   							"float": "right",
+		   							"background": "rgba(0,0,0,0)"
+		   						}
+		   					]
+		   				}
+		   	
+		   	}
+		   }
+		}
+        ,{
+            "path" : "pages/warning/warning",
+            "style" : {
+            	"navigationBarTitleText": "库存预警",
+            	"app-plus": {
+            				"titleNView": {
+            					"buttons": [{
+            							"fontSrc": "/static/yticon.ttf",
+            							"text": "设置",
+            							"fontSize": "16",
+            							"color": "black",
+            							"float": "right",
+            							"background": "rgba(0,0,0,0)"
+            						}
+            					]
+            				}
+            	
+            	}
+            }
+        }
+		,{
+		    "path" : "pages/warning/seting",
+		    "style" : {
+		    	"navigationBarTitleText": "设置",
+		    	"app-plus": {
+		    				"titleNView": {
+		    					"buttons": [{
+		    							"fontSrc": "/static/yticon.ttf",
+		    							"text": "保存",
+		    							"fontSize": "16",
+		    							"color": "black",
+		    							"float": "right",
+		    							"background": "rgba(0,0,0,0)"
+		    						}
+		    					]
+		    				}
+		    	
+		    	}
+		    }
+		}
+		,{
+		    "path" : "pages/warning/getvalue",
+		   "style" : {
+			"navigationBarTitleText": "库存预警设置"
+		   }
+		},{
+		    "path" : "pages/customer/info",
+		   "style" : {
+			"navigationBarTitleText": "详情"
+		   }
+		},{
+		    "path" : "pages/customer/editcustomer",
+		   "style" : {
+			"navigationBarTitleText": "编辑客户资料"
+		   }
+		},{
+		    "path" : "pages/customer/editdemand",
+		   "style" : {
+			"navigationBarTitleText": "客户需求"
+		   }
+		},{
+		    "path" : "pages/customer/care",
+		   "style" : {
+			"navigationBarTitleText": "客户关怀"
+		   }
+		},{
+		    "path" : "pages/customer/orderdetail",
+		   "style" : {
+			"navigationBarTitleText": "销售订单"
+		   }
+		},{
+		    "path" : "pages/customer/receivables",
+		   "style" : {
+			"navigationBarTitleText": "收款"
+		   }
+		}
+		,{
+		    "path" : "pages/customer/follow",
+		   "style" : {
+			"navigationBarTitleText": "跟进"
+		   }
+		},{
+		    "path" : "pages/customer/selectorder",
+		  "style" : {
+		  	"enablePullDownRefresh": true,
+		  	"navigationBarTitleText": "商品列表",
+		  	"app-plus": {
+		  		"titleNView": {
+		  			"backgroundColor":"white",
+		  			// "type": "transparent",
+		  			"searchInput": {
+		  				"backgroundColor": "rgba(231, 231, 231,.7)",
+		  				"borderRadius": "16px",
+		  				"placeholder": "搜索",
+		  				"disabled": false,
+		  				"placeholderColor": "#606266"
+		  			}
+		  		}
+		  	}
+		  }
+		},{
+		    "path" : "pages/customer/ordercar",
+		   "style" : {
+			"navigationBarTitleText": "预定车辆"
+		   }
+		},{
+		    "path" : "pages/customer/sellcar",
+		   "style" : {
+			"navigationBarTitleText": "出售车辆"
+		   }
+		},{
+		    "path" : "pages/car/paizheninfo",
+		   "style" : {
+			"navigationBarTitleText": "牌证信息"
+		   }
+		}
+		
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"color": "#C0C4CC",
+		"selectedColor": "#fa436a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab-home.png",
+				"selectedIconPath": "static/tab-home-current.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"iconPath": "static/car.jpg",
+				"selectedIconPath": "static/car.jpg",
+				"text": "车辆"
+			},
+			{
+				"pagePath": "pages/notice/noticelist",
+				"iconPath": "static/message.jpg",
+				"selectedIconPath": "static/message.jpg",
+				"text": "通知"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tab-my.png",
+				"selectedIconPath": "static/tab-my-current.png",
+				"text": "设置"
+			}
+		]
+	}
+}
