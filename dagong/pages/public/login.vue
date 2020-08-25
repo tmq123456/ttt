@@ -108,6 +108,8 @@
 							                wechat:data.member.wechat,
 							                qq:data.member.qq,
 							                company_name:data.member.merchant.company_name,
+											login_username:data.member.username,
+											type:data.member.type,
 							            });  
 							// uni.setStorage({
 							// 	key:'userinfo',

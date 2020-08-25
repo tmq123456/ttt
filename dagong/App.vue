@@ -20,6 +20,10 @@
 						this.login(res.data);
 					}
 				});
+			}else{
+				// uni.navigateTo({
+				// 	url: `/pages/public/login`
+				// })
 			}
 			
 		},

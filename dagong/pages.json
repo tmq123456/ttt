@@ -29,9 +29,10 @@
 				"navigationBarTitleText": "大公二手车市场",
 				//"navigationStyle": "custom",
 				// #endif 
+				// "enablePullDownRefresh":true,
 				"app-plus": {
 					"titleNView": {
-						"backgroundColor":"red",
+						"backgroundColor":"white",
 						// "type": "transparent",
 						"searchInput": {
 							"backgroundColor": "rgba(231, 231, 231,.7)",
@@ -44,7 +45,7 @@
 								"fontSrc": "/static/yticon.ttf",
 								"text": "\ue60d",
 								"fontSize": "26",
-								"color": "white",
+								"color": "black",
 								"float": "left",
 								"background": "rgba(0,0,0,0)"
 							},
@@ -52,7 +53,7 @@
 								"fontSrc": "/static/yticon.ttf",
 								"text": "+",
 								"fontSize": "27",
-								"color": "white",
+								"color": "black",
 								"background": "rgba(0,0,0,0)",
 								"redDot": true
 							}
@@ -179,7 +180,7 @@
 				"app-plus": {
 					"bounce": "none",
 					"titleNView": {
-						"backgroundColor":"red",
+						"backgroundColor":"white",
 						"searchInput": {
 							"backgroundColor": "rgba(231, 231, 231,.7)",
 							"borderRadius": "16px",
@@ -191,15 +192,17 @@
 								"fontSrc": "/static/yticon.ttf",
 								"text": "鼎旺精品二手车",
 								"fontSize": "16",
-								"color": "white",
+								"color": "black",
 								"float": "left",
-								"background": "rgba(0,0,0,0)"
+								"background": "rgba(0,0,0,0)",
+								"width":"150"
+								
 							},
 							{
 								"fontSrc": "/static/yticon.ttf",
 								"text": "+",
 								"fontSize": "27",
-								"color": "white",
+								"color": "black",
 								"background": "rgba(0,0,0,0)"
 								// "redDot": true
 							}
@@ -213,7 +216,7 @@
             "path" : "pages/car/list",
             "style" : {
 				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "商品列表",
+				"navigationBarTitleText": "汽车列表",
 				"app-plus": {
 					"titleNView": {
 						"backgroundColor":"white",
@@ -294,7 +297,14 @@
             "style" : {
 				"navigationBarTitleText": "新建客户"
 			}
-        },{
+        }
+		,{
+		    "path" : "pages/customer/detail",
+		    "style" : {
+				"navigationBarTitleText": "客户详情"
+			}
+		}
+		,{
             "path" : "pages/car/info",
             "style" : {
 				"navigationBarTitleText": "基础信息",
@@ -318,7 +328,20 @@
             "style" : {
 				"navigationBarTitleText": "基础信息"
 			}
-        },{
+        }
+		,{
+		    "path" : "pages/car/editor1",
+		    "style" : {
+				"navigationBarTitleText": "基础信息"
+			}
+		}
+		,{
+		    "path" : "pages/car/editor2",
+		    "style" : {
+				"navigationBarTitleText": "基础信息"
+			}
+		}
+		,{
             "path" : "pages/car/parameter",
             "style" : {
             	"navigationBarTitleText": "基础信息",
@@ -400,7 +423,9 @@
         }
         ,{
             "path" : "pages/reportform/reportform",
-            "style" : {}
+            "style" : {
+            	"navigationBarTitleText": "报表统计"
+            }
         }
         ,{
             "path" : "pages/task/task",
@@ -563,8 +588,51 @@
 		   "style" : {
 			"navigationBarTitleText": "牌证信息"
 		   }
+		},{
+		    "path" : "pages/car/appraiser",
+		   "style" : {
+			"navigationBarTitleText": "评估师"
+		   }
+		},{
+		    "path" : "pages/car/color",
+		   "style" : {
+			"navigationBarTitleText": "颜色"
+		   }
 		}
 		
+        ,{
+            "path" : "pages/set/role",
+            "style" : {
+            	"navigationBarTitleText": "员工管理",
+				"app-plus": {
+							"titleNView": {
+								"buttons": [{
+										"fontSrc": "/static/yticon.ttf",
+										"text": "添加",
+										"fontSize": "16",
+										"color": "black",
+										"float": "right",
+										"background": "rgba(0,0,0,0)"
+									}
+								]
+							}
+				
+				}
+				
+            }
+        },
+		{
+		    "path" : "pages/set/addmember",
+		    "style" : {
+		    	"navigationBarTitleText": "添加员工"
+		    }
+		}
+        ,{
+            "path" : "pages/report/report",
+            "style" : {
+            	"navigationBarTitleText": "报表"
+            }
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

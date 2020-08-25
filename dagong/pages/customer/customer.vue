@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="navbar" :style="{position:headerPosition,top:headerTop}">
+		<!-- <view class="navbar" :style="{position:headerPosition,top:headerTop}">
 			<view class="nav-item" id="brand" :class="{current: filterIndex === 0}" @click="toggleCateMask('show')">
 				{{brand}}
 			</view>
@@ -10,15 +10,14 @@
 			<view class="nav-item" id="sort" :class="{current: filterIndex === 2}" @click="toggleCateMask2('show')">
 				{{sort}}
 			</view>
-			<!-- <text class="cate-item yticon icon-fenlei1" @click="toggleCateMask('show')"></text> -->
-		</view>
+		</view> -->
 		<view class="goods-list">
 			<view 
 				v-for="(item, index) in goodsList" :key="index"
 				class="goods-item"
 				@click="navToDetailPage(item)"
 			>
-				<text class="title clamp">客户1</text>
+				<text class="title clamp">{{item.username}}</text>
 				<view class="price-box">
 					<text class="">跟进状态</text>
 					<text>2020/04/02创建  销售：小王</text>
@@ -113,9 +112,9 @@
 			this.headerTop = document.getElementsByTagName('uni-page-head')[0].offsetHeight+'px';
 			// #endif
 			this.cateId = options.tid;
-			this.loadCateList(options.fid,options.sid);
-			this.loadCateList1(options.fid,options.sid);
-			this.loadCateList2(options.fid,options.sid);
+			// this.loadCateList(options.fid,options.sid);
+			// this.loadCateList1(options.fid,options.sid);
+			// this.loadCateList2(options.fid,options.sid);
 			this.loadData();
 		},
 		onPageScroll(e){
@@ -168,44 +167,36 @@
 			},
 			//加载商品 ，带下拉刷新和上滑加载
 			async loadData(type='add', loading) {
-				//没有更多直接返回
-				if(type === 'add'){
-					if(this.loadingType === 'nomore'){
-						return;
-					}
-					this.loadingType = 'loading';
-				}else{
-					this.loadingType = 'more'
-				}
 				
-				let goodsList = await this.$api.json('goodsList');
-				if(type === 'refresh'){
-					this.goodsList = [];
-				}
-				//筛选，测试数据直接前端筛选了
-				if(this.filterIndex === 1){
-					goodsList.sort((a,b)=>b.sales - a.sales)
-				}
-				if(this.filterIndex === 2){
-					goodsList.sort((a,b)=>{
-						if(this.priceOrder == 1){
-							return a.price - b.price;
+				const userinfo = uni.getStorageSync('userinfo');
+				var _self=this;
+				_self.userinfo=userinfo;
+				uni.request({
+					url: 'http://dg.51jump.cn/merapi/v1/car/car-member/list', 
+					data: {
+						"access-token":userinfo.access_token,
+						"mer_id":userinfo.uid,
+						"type":userinfo.type,
+					},
+					method:"get",
+					header: {
+						'custom-header': 'hello' //自定义请求头信息
+					},
+					success: function (res) {
+						if(res.data.code=== 200){
+							console.log('1111'+res.data);
+							_self.goodsList=res.data.data;
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+						
+							}
 						}
-						return b.price - a.price;
-					})
-				}
-				
-				this.goodsList = this.goodsList.concat(goodsList);
-				
-				//判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
-				this.loadingType  = this.goodsList.length > 20 ? 'nomore' : 'more';
-				if(type === 'refresh'){
-					if(loading == 1){
-						uni.hideLoading()
-					}else{
-						uni.stopPullDownRefresh();
 					}
-				}
+				});
 			},
 			//筛选点击
 			tabClick(index){
@@ -295,9 +286,9 @@
 			//详情
 			navToDetailPage(item){
 				//测试数据没有写id，用title代替
-				let id = item.title;
+				let id = item.id;
 				uni.navigateTo({
-					url: `/pages/customer/info?id=${id}`
+					url: `/pages/customer/detail?id=${id}`
 				})
 			},
 			stopPrevent(){},
@@ -320,7 +311,7 @@
 		background: $page-color-base;
 	}
 	.content{
-		padding-top: 96upx;
+		padding-top: 0upx;
 	}
 
 	.navbar{

@@ -1,8 +1,9 @@
 <template>
 	<view style="overflow:auto;overflow-x: hidden">
-		<view class="yt-list-cell b-b">
+		<view class="yt-list-cell b-b" @click="toggleCateMask('show')">
 			<text class="cell-tit clamp">销售归属</text>
-			<input class="desc" type="text" placeholder="请输入" placeholder-class="placeholder" />
+			<input disabled="disabled" type="text" :value="color_title" :data="color_id"/>
+			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="">
 			<text class="name" style="font-size: 16px;color: grey;">客户基本资料（手机号和微信号至少填一项）</text>
@@ -24,8 +25,8 @@
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">性别</text>
-				<radio class="radio" type="radio" name="car_type1" value="0" :checked="bianhao1==='0'" @click="radio1('0')"/><text style="font-size: 15px;">男</text>
-				<radio class="radio" type="radio" name="car_type1" value="1" :checked="bianhao1==='1'" @click="radio1('1')"/><text style="font-size: 15px;">女</text>
+				<radio class="radio" type="radio" name="car_type1" value="0" :checked="bianhao1===0" @click="radio1(0)"/><text style="font-size: 15px;">男</text>
+				<radio class="radio" type="radio" name="car_type1" value="1" :checked="bianhao1===1" @click="radio1(1)"/><text style="font-size: 15px;">女</text>
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">来源</text>
@@ -35,8 +36,8 @@
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">重点客户</text>
-				<radio class="radio" type="radio" name="car_type2" value="0" :checked="bianhao2==='0'" @click="radio2('0')"/><text style="font-size: 15px;margin-right: 15px;">是</text>
-				<radio class="radio" type="radio" name="car_type2" value="1" :checked="bianhao2==='1'" @click="radio2('1')"/><text style="font-size: 15px;">否</text>
+				<radio class="radio" type="radio" name="car_type2" value="0" :checked="bianhao2===0" @click="radio2(0)"/><text style="font-size: 15px;margin-right: 15px;">是</text>
+				<radio class="radio" type="radio" name="car_type2" value="1" :checked="bianhao2===1" @click="radio2(1)"/><text style="font-size: 15px;">否</text>
 			</view>
 			<!-- <view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">更多资料</text>
@@ -52,9 +53,10 @@
 				<text class="cell-tit clamp">预算</text>
 				<input class="desc" type="text" placeholder="请输入" placeholder-class="placeholder" v-model="customerData.yusuan"/>万元
 			</view>
-			<view class="yt-list-cell b-b">
+			<view class="yt-list-cell b-b" @click="toggleCateMask1('show')">
 				<text class="cell-tit clamp">意向车型</text>
-				<input class="desc" type="text" placeholder="请输入" placeholder-class="placeholder" />
+				<input disabled="disabled" type="text" :value="car_title" :data="car_id"/>
+				<text class="cell-more yticon icon-you"></text>
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">预计买车时间</text>
@@ -139,13 +141,33 @@
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit">到时间提醒我</text>
-				<switch checked color="#fa436a" @change="switchChange" />
+				<switch color="#fa436a" @change="switchChange" />
 			</view>
 		</view>
 		
 		<!-- 底部 -->
 		<view class="footer">
 			<text class="submit" @click="submit">保存</text>
+		</view>
+		
+		<view class="cate-mask" :class="cateMaskState===0 ? 'none' : cateMaskState===1 ? 'show' : ''" @click="toggleCateMask">
+			<view class="cate-content" @click.stop.prevent="stopPrevent" @touchmove.stop.prevent="stopPrevent">
+				<scroll-view scroll-y class="cate-list">
+					<view v-for="item in cateList" :key="item.id">
+						<view class="yt-list-cell b-b" @click="changeCate(item.id,item.realname)">{{item.realname}}</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		
+		<view class="cate-mask" :class="cateMaskState1===0 ? 'none' : cateMaskState1===1 ? 'show' : ''" @click="toggleCateMask1">
+			<view class="cate-content" @click.stop.prevent="stopPrevent" @touchmove.stop.prevent="stopPrevent">
+				<scroll-view scroll-y class="cate-list">
+					<view v-for="item in cateList1" :key="item.id">
+						<view class="yt-list-cell b-b" @click="changeCate1(item.id,item.brand)">{{item.brand}}{{item.brand1}}{{item.brand_chexing}}</view>
+					</view>
+				</scroll-view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -160,6 +182,14 @@
 				format: true
 			})
 			return {
+				car_title:'',
+				car_id:'',
+				cateMaskState1:0,
+				cateList1:{},
+				color_title:'',
+				color_id:'',
+				cateMaskState:0,
+				cateList:{},
 				customerData:{
 					
 				},
@@ -197,7 +227,8 @@
 				time: '12:01',
 				date1: currentDate1,
 				time1: '12:01',
-				access_token:''
+				access_token:'',
+				merchant_id:''
 			}
 		},
 		onLoad(option){
@@ -208,6 +239,7 @@
 					const listdata = res.data;
 					this.list = listdata;
 					_self.access_token=this.list.access_token;
+					_self.merchant_id=this.list.username;
 				},
 				fail:function(e){
 					uni.navigateTo({
@@ -217,6 +249,27 @@
 			});
 		},
 		methods: {
+			//分类点击
+			changeCate1(color_id,color_title){
+				this.car_id=color_id;
+				this.car_title = color_title;
+				this.customerData.intention=color_id;
+				this.toggleCateMask1();
+			},
+			//显示优惠券面板
+			toggleMask1(type){
+				let timer = type === 'show' ? 10 : 300;
+				let	state = type === 'show' ? 1 : 0;
+				this.maskState1 = 2;
+				setTimeout(()=>{
+					this.maskState1 = state;
+				}, timer)
+			},
+			changeCate(color_id,color_title){
+				this.color_id=color_id;
+				this.color_title = color_title;
+				this.toggleCateMask();
+			},
 			//显示优惠券面板
 			toggleMask(type){
 				let timer = type === 'show' ? 10 : 300;
@@ -233,6 +286,7 @@
 				this.payType = type;
 			},
 			submit(){
+				this.customerData.mer_id=this.color_id;
 				let data = this.customerData;
 				console.log(this.access_token);
 				console.log(JSON.stringify(data))
@@ -252,11 +306,17 @@
 								url: '/pages/customer/customer'										
 							})
 						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
 							uni.showToast({
 								icon: 'none',
-							    title: '保存失败',
-							    duration: 2000
+								title: '保存失败',
+								duration: 2000
 							});
+							}
 						}
 				    }
 				});
@@ -367,6 +427,77 @@
 			switchChange(e){
 				let statusTip = e.detail.value ? 1: 0;
 				this.customerData.is_remind=statusTip;
+			},
+			//显示分类面板
+			toggleCateMask1(type){
+				this.loadCateList1();
+				let timer = type === 'show' ? 10 : 300;
+				let	state = type === 'show' ? 1 : 0;
+				this.cateMaskState1 = 2;
+				setTimeout(()=>{
+					this.cateMaskState1 = state;
+				}, timer)
+			},
+			async loadCateList1(){
+				var _self = this;
+				uni.request({
+					url: 'http://dg.51jump.cn/merapi/v1/car/car/index', 
+					data: {
+						"access-token":this.access_token,
+					},
+					method:"get",
+					header: {
+						'custom-header': 'hello' //自定义请求头信息
+					},
+					success: function (res) {
+						if(res.data.code=== 200){
+							_self.cateList1=res.data.data;
+							console.log("222111"+_self.cateList1)
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: '保存失败',
+								duration: 2000
+							});
+						}
+					}
+				});
+			},
+			toggleCateMask(type){
+				this.loadCateList();
+				let timer = type === 'show' ? 10 : 300;
+				let	state = type === 'show' ? 1 : 0;
+				this.cateMaskState = 2;
+				setTimeout(()=>{
+					this.cateMaskState = state;
+				}, timer)
+			},
+			async loadCateList(){
+				var _self = this;
+				uni.request({
+					url: 'http://dg.51jump.cn/merapi/v1/site/mer_list_type', 
+					data: {
+						"access-token":this.access_token,
+						"merchant_id":this.merchant_id,
+						"type":2,
+					},
+					method:"get",
+					header: {
+						'custom-header': 'hello' //自定义请求头信息
+					},
+					success: function (res) {
+						if(res.data.code=== 200){
+							_self.cateList=res.data.data;
+							console.log("222111"+_self.cateList)
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: '保存失败',
+								duration: 2000
+							});
+						}
+					}
+				});
 			},
 		}
 	}
@@ -820,5 +951,35 @@
 		background: rgba(255, 255, 255, 0.00);
 		border: 3upx dashed #979797;
 		border-radius: 8upx;
+	}
+	/* 分类 */
+	.cate-mask{
+		position: fixed;
+		left: 0;
+		top: var(--window-top);
+		bottom: 0;
+		width: 100%;
+		background: rgba(0,0,0,0);
+		z-index: 95;
+		transition: .3s;
+		
+		.cate-content{
+			width: 630upx;
+			height: 100%;
+			background: #fff;
+			float:right;
+			transform: translateX(100%);
+			transition: .3s;
+		}
+		&.none{
+			display: none;
+		}
+		&.show{
+			background: rgba(0,0,0,.4);
+			
+			.cate-content{
+				transform: translateX(0);
+			}
+		}
 	}
 </style>

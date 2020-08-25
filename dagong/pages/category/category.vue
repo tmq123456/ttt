@@ -398,6 +398,7 @@
 				flist: [],
 				slist: [],
 				tlist: [],
+				company_name:''
 			}
 		},
 		onLoad(){
@@ -406,6 +407,9 @@
 		methods: {
 			async loadData(){
 				let list = await this.$api.json('cateList');
+				const userinfo = uni.getStorageSync('userinfo'); 
+				var _self=this;
+				_self.company_name=userinfo.company_name;
 				list.forEach(item=>{
 					if(!item.pid){
 						this.flist.push(item);  //pid为父级id, 没有pid或者pid=0是一级分类
@@ -415,6 +419,10 @@
 						this.tlist.push(item); //3级分类
 					}
 				}) 
+				var webview = this.$mp.page.$getAppWebview();
+				webview.setTitleNViewButtonStyle(0, {
+					text:_self.company_name,
+				});
 			},
 			//一级分类点击
 			tabtap(item){

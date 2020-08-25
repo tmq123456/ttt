@@ -1,5 +1,22 @@
 <template>
 	<view class="container">
+		<!-- 头部轮播 -->
+		<view class="carousel-section">
+			<!-- 标题栏和状态栏占位符 -->
+			<view class="titleNview-placing"></view>
+			<!-- 背景色区域 -->
+			<swiper class="carousel" circular @change="swiperChange">
+				<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToDetailPage({title: '轮播广告'})">
+					<image :src="item.image" />
+				</swiper-item>
+			</swiper>
+			<!-- 自定义swiper指示器 -->
+			<view class="swiper-dots">
+				<text class="num">{{swiperCurrent+1}}</text>
+				<text class="sign">/</text>
+				<text class="num">{{swiperLength}}</text>
+			</view>
+		</view>
 		<!-- 分类 -->
 		<view class="cate-section">
 			<view class="cate-item" @click="tiaozhuan(3)">
@@ -10,7 +27,7 @@
 				<image src="/static/temp/c5.png"></image>
 				<text>联盟库存</text>
 			</view>
-			<view class="cate-item">
+			<view class="cate-item" @click="tiaozhuan(9)">
 				<image src="/static/temp/c6.png"></image>
 				<text>报表</text>
 			</view>
@@ -105,12 +122,53 @@
 				carouselList: [],
 				goodsList: [],
 				nowTime:'',
-				tanchuan:0
+				tanchuan:0,
+				carouselList:[]
 			};
 		},
 		onLoad() {
 			const userinfo = uni.getStorageSync('userinfo'); 
-			console.log('asss'+userinfo.access_token)
+			console.log('asss'+userinfo.access_token);
+			var _self=this;
+			uni.request({
+				url: 'http://dg.51jump.cn/merapi/v1/car/car-banner/index', 
+				data: {
+					"access-token":userinfo.access_token,
+				},
+				method:"GET",
+				header: {
+					'custom-header': 'hello' //自定义请求头信息
+				},
+				success: function (res) {
+					if(res.data.code=== 200){
+						console.log('production_date'+res.data.data);
+						_self.carouselList=res.data.data;
+						_self.swiperLength = _self.carouselList.length;
+					}else{
+						if(res.data.code=== 401){
+							uni.navigateTo({
+								url: `/pages/public/login`
+							})
+						}else{
+						
+						}
+					}
+				}
+			});
+			// _self.carouselList = [{
+			// 		src: "http://dg.51jump.cn/attachment/images/2020/05/23/image_1590245026_goqY4oK9.jpg",
+			// 		background: "rgb(203, 87, 60)",
+			// 	},
+			// 	{
+			// 		src: "http://dg.51jump.cn/attachment/images/2020/05/23/image_1590244480_Hn7VfsN1.jpg",
+			// 		background: "rgb(205, 215, 218)",
+			// 	},
+			// 	{
+			// 		src: "http://dg.51jump.cn/attachment/images/2020/05/23/image_1590245157_DT3tDpjx.jpg",
+			// 		background: "rgb(183, 73, 69)",
+			// 	}
+			// ]
+			this.loadData();
 			//location.reload();
 		},
 		methods: {
@@ -119,26 +177,23 @@
 			 * 分次请求未作整合
 			 */
 			async loadData() {
-				let carouselList = await this.$api.json('carouselList');
-				this.titleNViewBackground = carouselList[0].background;
-				this.swiperLength = carouselList.length;
-				this.carouselList = carouselList;
-				
-				let goodsList = await this.$api.json('goodsList');
-				this.goodsList = goodsList || [];
+				// this.titleNViewBackground = this.carouselList[0].background;
+				// console.log("this.carouselList.length"+this.carouselList)
+				// this.swiperLength = this.carouselList.length;
+				// this.carouselList = this.carouselList;
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
 				const index = e.detail.current;
 				this.swiperCurrent = index;
-				this.titleNViewBackground = this.carouselList[index].background;
+				// this.titleNViewBackground = this.carouselList[index].background;
 			},
 			//详情页
 			navToDetailPage(item) {
 				//测试数据没有写id，用title代替
 				let id = item.title;
 				uni.navigateTo({
-					url: `/pages/car/product?id=${id}`
+					url: `/pages/car/list?id=${id}`
 				})
 			},
 			getDay:function(num) {
@@ -183,6 +238,8 @@
 					var url="/pages/customer/care?type=2";
 				}else if(type===8){//客户
 					var url="/pages/customer/care?type=3";
+				}else if(type===9){//客户
+					var url="/pages/reportform/reportform";
 				}
 				this.tanchuan=0;
 				uni.navigateTo({
@@ -285,7 +342,7 @@
 
 		.titleNview-placing {
 			height: var(--status-bar-height);
-			padding-top: 44px;
+			padding-top: 8px;
 			box-sizing: content-box;
 		}
 
@@ -647,7 +704,7 @@
 		}
 	}
 	.btn{
-			transform: translateY(-340%);
+			transform: translateY(-500%);
 		}
 	
 

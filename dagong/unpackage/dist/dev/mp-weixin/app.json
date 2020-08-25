@@ -1,0 +1,97 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/car/product",
+    "pages/set/set",
+    "pages/userinfo/userinfo",
+    "pages/cart/cart",
+    "pages/public/login",
+    "pages/user/user",
+    "pages/detail/detail",
+    "pages/order/order",
+    "pages/money/money",
+    "pages/car/create",
+    "pages/address/address",
+    "pages/address/addressManage",
+    "pages/money/pay",
+    "pages/money/paySuccess",
+    "pages/notice/notice",
+    "pages/category/category",
+    "pages/car/list",
+    "pages/notice/setnotice",
+    "pages/notice/setnotice",
+    "pages/notice/noticelist",
+    "pages/image/image",
+    "pages/brand/brand",
+    "pages/customer/customer",
+    "pages/customer/addcustomer",
+    "pages/car/info",
+    "pages/car/editor",
+    "pages/car/parameter",
+    "pages/car/addparameter",
+    "pages/car/outfit",
+    "pages/car/editoutfit",
+    "pages/car/editoutfitorder",
+    "pages/car/outfitorderdetail",
+    "pages/car/license",
+    "pages/car/editlicense",
+    "pages/car/editlicensebuy",
+    "pages/car/content",
+    "pages/reportform/reportform",
+    "pages/task/task",
+    "pages/userinfo/weixin",
+    "pages/userinfo/qq",
+    "pages/warning/warning",
+    "pages/warning/seting",
+    "pages/warning/getvalue",
+    "pages/customer/info",
+    "pages/customer/editcustomer",
+    "pages/customer/editdemand",
+    "pages/customer/care",
+    "pages/customer/orderdetail",
+    "pages/customer/receivables",
+    "pages/customer/follow",
+    "pages/customer/selectorder",
+    "pages/customer/ordercar"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#C0C4CC",
+    "selectedColor": "#fa436a",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tab-home.png",
+        "selectedIconPath": "static/tab-home-current.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "iconPath": "static/car.jpg",
+        "selectedIconPath": "static/car.jpg",
+        "text": "车辆"
+      },
+      {
+        "pagePath": "pages/notice/noticelist",
+        "iconPath": "static/message.jpg",
+        "selectedIconPath": "static/message.jpg",
+        "text": "通知"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/tab-my.png",
+        "selectedIconPath": "static/tab-my-current.png",
+        "text": "设置"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

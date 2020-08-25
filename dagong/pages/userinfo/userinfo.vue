@@ -163,32 +163,38 @@
 							filePath: tempFilePaths[0],
 							name: 'file',
 							success: (uploadFileRes) => {
-								this.logo = JSON.parse(uploadFileRes.data).data.url;
-								this.userData.head_portrait=this.logo;
-								let data = this.userData;
-								uni.request({
-									url: 'http://dg.51jump.cn/merapi/v1/site/update?access-token='+this.userinfo.access_token+'&id='+this.uid, 
-									data: JSON.stringify(data),
-									method:"post",
-									header: {
-										'custom-header': 'hello' //自定义请求头信息
-									},
-									success: function (res) {
-										if(res.data.code=== 200){
-											uni.showToast({
-												icon: 'none',
-												title: '保存成功',
-												duration: 2000
-											});
-										}else{
-											uni.showToast({
-												icon: 'none',
-												title: '保存失败',
-												duration: 2000
-											});
+								if(JSON.parse(uploadFileRes.data).code==401){
+									uni.navigateTo({
+										url: `/pages/public/login`
+									})
+								}else{
+									this.logo = JSON.parse(uploadFileRes.data).data.url;
+									this.userData.head_portrait=this.logo;
+									let data = this.userData;
+									uni.request({
+										url: 'http://dg.51jump.cn/merapi/v1/site/update?access-token='+this.userinfo.access_token+'&id='+this.uid, 
+										data: JSON.stringify(data),
+										method:"post",
+										header: {
+											'custom-header': 'hello' //自定义请求头信息
+										},
+										success: function (res) {
+											if(res.data.code=== 200){
+												uni.showToast({
+													icon: 'none',
+													title: '保存成功',
+													duration: 2000
+												});
+											}else{
+												uni.showToast({
+													icon: 'none',
+													title: '保存失败',
+													duration: 2000
+												});
+											}
 										}
-									}
-								});
+									});
+								}
 							}
 						});
 					}
@@ -214,11 +220,17 @@
 								duration: 2000
 							});
 						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
 							uni.showToast({
 								icon: 'none',
 								title: '保存失败',
 								duration: 2000
 							});
+							}
 						}
 					}
 				});
@@ -274,11 +286,17 @@
 								duration: 2000
 							});
 						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
 							uni.showToast({
 								icon: 'none',
 								title: '保存失败',
 								duration: 2000
 							});
+							}
 						}
 					}
 				});
@@ -307,6 +325,14 @@
 							_self.wechat=res.data.data.wechat;
 							_self.qq=res.data.data.qq;
 							console.log(_self.logo)
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+							
+							}
 						}
 					}
 				});

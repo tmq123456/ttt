@@ -10,7 +10,7 @@
 				<view class="info-box">
 					<text class="username">{{realname}}</text>
 				</view>
-				<text style="margin-top: 50px;margin-left: -50px;font-size: 13px;">门店管理层 销售顾问</text>
+				<!-- <text style="margin-top: 50px;margin-left: -50px;font-size: 13px;">门店管理层 销售顾问</text> -->
 				<text class="yticon icon-you"></text>
 			</view>
 		</view>
@@ -28,9 +28,7 @@
 			<image class="arc" src="/static/arc.png"></image>
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
-				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="账单" tips="0.00"></list-cell>
-				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="增值业务" @eventClick="navTo('/pages/address/address')"></list-cell>
-				<list-cell icon="icon-share" iconColor="#9789f7" title="员工及部门管理" tips=""></list-cell>
+				<list-cell v-show="type==10" icon="icon-shezhi1" iconColor="#e07472" title="员工管理" border="" @eventClick="navTo('/pages/set/role')"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="业务规则设置" tips=""></list-cell>
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="产品手册"></list-cell>
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="用户协议"></list-cell>
@@ -55,6 +53,7 @@
 		},
 		data(){
 			return {
+				type:'',
 				coverTransform: 'translateY(0px)',
 				coverTransition: '0s',
 				moving: false,
@@ -106,7 +105,6 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			navTo(url){
-				url = '/pages/set/set';
 				uni.navigateTo({  
 					url
 				})  
@@ -153,6 +151,7 @@
 			loadCateList(){
 				const userinfo = uni.getStorageSync('userinfo'); 
 				var _self=this;
+				_self.type=userinfo.type;
 				uni.request({
 					url: 'http://dg.51jump.cn/merapi/v1/site/view', 
 					data: {
@@ -172,6 +171,14 @@
 							_self.wechat=res.data.data.wechat;
 							_self.qq=res.data.data.qq;
 							console.log(_self.logo)
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+							
+							}
 						}
 					}
 				});

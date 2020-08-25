@@ -651,7 +651,7 @@
 			  					</view>
 			  				</view>
 			  			</block>
-			  			<view class='info'>上传证书/证件，不超过{{imageLength1}}张。(非必填)</view>
+			  			<view class='info'>上传车辆照片，不超过{{imageLength1}}张。(非必填)</view>
 			  		</view>
 			  	<!-- 图片上传 -->
 			  	</view>
@@ -772,7 +772,7 @@
 			  				</view>
 			  		 
 			  			</view>
-			  			<view class='info'>仅支持上传一个，视频不超过180s</view>
+			  			<view class='info'>上传其他照片，不超过{{imageLength1}}张。(非必填)</view>
 			  		</view>
 			  	<!-- 图片上传 -->
 			  	</view>
@@ -809,14 +809,16 @@
 			mpvueCityPicker1
 		},
 		async onLoad(options){
-			this.headerTop = document.getElementsByTagName('uni-page-head')[0].offsetHeight+'px';
+			//this.headerTop = document.getElementsByTagName('uni-page-head')[0].offsetHeight+'px';
 			let id = options.id;
+			console.log('id是'+id);
 			if(id){
 				const userinfo = uni.getStorageSync('userinfo');
 				var _self=this;
 				_self.car_id=id;
 				_self.userinfo=userinfo;
 				_self.access_token=userinfo.access_tokenn;
+				console.log('token是'+_self.access_token);
 				uni.request({
 					url: 'http://dg.51jump.cn/merapi/v1/car/car/view', 
 					data: {
@@ -938,6 +940,20 @@
 							_self.carCustomerData.psy_price=res.data.data.procedures.psy_price;
 							_self.carCustomerData.qt_zhanghu=res.data.data.procedures.qt_zhanghu;
 							_self.carCustomerData.yixiang=res.data.data.procedures.yixiang;
+							_self.type5Index=res.data.data.procedures.yixiang;
+							_self.type6Index=res.data.data.procedures.from;
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+							uni.showToast({
+								icon: 'none',
+								title: '保存失败',
+								duration: 2000
+							});
+							}
 						}
 					}
 				});
@@ -1634,24 +1650,79 @@
 				this.shouxu_info.jqxd=this.shui10;
 				this.shouxu_info.syxd=this.shui11;
 				this.shouxu_info.ccsz=this.shui12;
-				// this.shouxu_info.push(this.shui1);
-				// this.shouxu_info.push(this.shui2);
-				// this.shouxu_info.push(this.shui3);
-				// this.shouxu_info.push(this.shui4);
-				// this.shouxu_info.push(this.shui5);
-				// this.shouxu_info.push(this.shui6);
-				// this.shouxu_info.push(this.shui7);
-				// this.shouxu_info.push(this.shui8);
-				// this.shouxu_info.push(this.shui9);
-				// this.shouxu_info.push(this.shui10);
-				// this.shouxu_info.push(this.shui11);
-				// this.shouxu_info.push(this.shui12);
+			
 				this.toggleCateMask3();
 				console.log('shouwinfo:'+this.shouxu_info)
+				const userinfo = uni.getStorageSync('userinfo');
+				uni.request({
+				    url: 'http://dg.51jump.cn/merapi/v1/car/car/update_procedures?car_id='+this.car_id+'&access-token='+userinfo.access_token, //仅为示例，并非真实接口地址。
+				    data: JSON.stringify(this.shouxu_info),
+					method:"post",
+				    header: {
+				        'custom-header': 'hello' //自定义请求头信息
+				    },
+				    success: function (res) {
+						if(res.data.code=== 200){
+							const data=res.data.data;
+							console.log("穿的数据："+this.carData);
+							console.log("返回状态1："+data);
+						}else{
+							uni.showToast({
+								icon: 'none',
+							    title: '保存失败',
+							    duration: 2000
+							});
+						}
+				    }
+				});
 			},
 			changeCate4(){
 				this.carOtherData.c_appraiser=this.aid;
 				this.toggleCateMask4();
+				const userinfo = uni.getStorageSync('userinfo');
+				uni.request({
+				    url: 'http://dg.51jump.cn/merapi/v1/car/car/update_assessinfo?car_id='+this.car_id+'&access-token='+userinfo.access_token, //仅为示例，并非真实接口地址。
+				    data: JSON.stringify(this.carOtherData),
+					method:"post",
+				    header: {
+				        'custom-header': 'hello' //自定义请求头信息
+				    },
+				    success: function (res) {
+						if(res.data.code=== 200){
+							const data=res.data.data;
+							console.log("穿的数据："+this.carData);
+							console.log("返回状态1："+data);
+						}else{
+							uni.showToast({
+								icon: 'none',
+							    title: '保存失败',
+							    duration: 2000
+							});
+						}
+				    }
+				});
+				uni.request({
+				    url: 'http://dg.51jump.cn/merapi/v1/car/car/update_assesscustomer?car_id='+this.car_id+'&access-token='+userinfo.access_token, //仅为示例，并非真实接口地址。
+				    data: JSON.stringify(this.carCustomerData),
+					method:"post",
+				    header: {
+				        'custom-header': 'hello' //自定义请求头信息
+				    },
+				    success: function (res) {
+						if(res.data.code=== 200){
+							const data=res.data.data;
+							console.log("穿的数据："+this.carData);
+							console.log("返回状态1："+data);
+						}else{
+							uni.showToast({
+								icon: 'none',
+							    title: '保存失败',
+							    duration: 2000
+							});
+						}
+				    }
+				});
+				
 			},
 			toggleMask(type){
 				let timer = type === 'show' ? 10 : 300;
@@ -1721,7 +1792,7 @@
 				console.log(JSON.stringify(data))
 				const userinfo = uni.getStorageSync('userinfo');
 				uni.request({
-				    url: 'http://dg.51jump.cn/merapi/v1/car/car/update_procedures?car_id='+this.car_id+'&access-token='+userinfo.access_token, //仅为示例，并非真实接口地址。
+				    url: 'http://dg.51jump.cn/merapi/v1/car/car/update?id='+this.car_id+'&access-token='+userinfo.access_token, //仅为示例，并非真实接口地址。
 				    data: JSON.stringify(data),
 					method:"post",
 				    header: {

@@ -57,76 +57,96 @@
 				</view>
 				<text class="yticon icon-you"></text>
 			</view>
-			<view class="share-section" @click="share">
+			<view class="share-section">
 				<text class="tit">{{carinfo.car_card}}<br/> <text style="font-size: 10px;margin-left: 10px;">车牌号</text></text>
 				<text class="tit" style="margin-left: 60px;">{{carinfo.car_prov_gui}}<br/><text style="font-size: 10px;">归属地</text></text>
 				<text class="tit" style="margin-left: 60px;width:120px">{{carinfo.production_date}}<br/> <text style="font-size: 10px;margin-left: 10px;">出厂年月</text></text>
 			</view>
-			<view class="c-row b-b" @click="toggleSpec(2)">
+			<view v-show="userinfo.uid==carinfo.merchant_id">
+			<!-- <view class="c-row b-b" @click="toggleSpec(2)">
 				<text class="tit" style="font-weight:bold;">参数配置</text>
 				<view class="con">
 				</view>
 				<text class="yticon icon-you"></text>
 			</view>
-			<view class="share-section" @click="share">
+			<view class="share-section">
 				<text class="tit" style="font-size: 10px;">无钥匙启动系统</text>
 				<text class="tit" style="font-size: 10px;">自助头灯</text>
 				<text class="tit" style="font-size: 10px;">上坡辅助</text>
 				<text class="tit" style="font-size: 10px;">方向盘换挡</text>
-			</view>
-			<view class="c-row b-b" @click="toggleSpec(3)">
+			</view> -->
+			<!-- <view class="c-row b-b" @click="toggleSpec(3)">
 				<text class="tit" style="font-weight:bold;">整备信息</text>
 				<view class="con">
 				</view>
 				<text class="yticon icon-you"></text>
+			</view> -->
+			<view class="c-row b-b">
+				<text class="tit" style="font-weight:bold;">整备信息</text>
+				<view class="con">
+				</view>
 			</view>
-			<view class="share-section" @click="share">
+			<view class="share-section">
 				<text class="" style="font-size: 10px;">整备状态：待整备</text>
 			</view>
-			<view class="c-row b-b" @click="toggleSpec(4)">
+			<!-- <view class="c-row b-b" @click="toggleSpec(4)">
 				<text class="tit" style="font-weight:bold;">牌证信息</text>
 				<view class="con">
 				</view>
 				<text class="yticon icon-you"></text>
+			</view> -->
+			<view class="c-row b-b">
+				<text class="tit" style="font-weight:bold;">牌证信息</text>
+				<view class="con">
+				</view>
 			</view>
-			<view class="share-section" @click="share">
-				<text class="tit" style="font-size: 10px;">行驶证：-</text>
-				<text class="tit" style="font-size: 10px;">过户次数：-</text>
-				<text class="tit" style="font-size: 10px;">登记证：-</text>
-				<text class="tit" style="font-size: 10px;">钥匙：-</text>
-				<text class="tit" style="font-size: 10px;">交强险到期日：-</text>
-				<text class="tit" style="font-size: 10px;">年检到期日：-</text>
+			<view class="share-section">
+				<text class="tit" style="font-size: 10px;">行驶证：-{{shouxu_info.xsz}}</text>
+				<text class="tit" style="font-size: 10px;">过户次数：-{{carinfo.guohu}}</text>
+				<text class="tit" style="font-size: 10px;">登记证：-{{shouxu_info.djz}}</text>
+				<text class="tit" style="font-size: 10px;">钥匙：-{{carinfo.key_car_num}}</text>
+				<text class="tit" style="font-size: 10px;">交强险到期日：-{{shouxu_info.jqxd}}</text>
+				<text class="tit" style="font-size: 10px;">年检到期日：-{{carinfo.yearly_date}}</text>
 			</view>
-			<view class="c-row b-b" @click="toggleSpec(5)">
+			<!-- <view class="c-row b-b" @click="toggleSpec(5)">
 				<text class="tit" style="font-weight:bold;">过户信息</text>
 				<view class="con">
 				</view>
 				<text class="yticon icon-you"></text>
+			</view> -->
+			<view class="c-row b-b">
+				<text class="tit" style="font-weight:bold;">过户信息</text>
+				<view class="con">
+				</view>
 			</view>
-			<view class="share-section" @click="share">
-				<text class="tit" style="font-size: 10px;">办理状态：</text>
-				<text class="tit" style="font-size: 10px;">采购待落户</text>
+			<view class="share-section">
+				<text class="" style="font-size: 10px;">办理状态：待过户</text>
+			</view>
+			<view class="share-section">
+				<!-- <text class="tit" style="font-size: 10px;">办理状态：待过户</text> -->
+				<!-- <text class="tit" style="font-size: 10px;">采购待落户</text>
 				<text class="tit" style="font-size: 10px;">预计完成时间：</text>
 				<text class="tit" style="font-size: 10px;">-</text>
 				<text class="tit" style="font-size: 10px;">联系人：</text>
-				<text class="tit" style="font-size: 10px;">-</text>
+				<text class="tit" style="font-size: 10px;">-</text> -->
+			</view>
 			</view>
 			<view class="c-row b-b">
-				<text class="tit">催促过户</text>
+				<!-- <text class="tit">催促过户</text> -->
 			<!-- 	<view class="bz-list con">
 					<text>7天无理由退换货 ·</text>
 					<text>假一赔十 ·</text>
 				</view> -->
 			</view>
-			<view class="c-row b-b" @click="toggleSpec(6)">
+		<!-- 	<view class="c-row b-b" @click="toggleSpec(6)">
 				<text class="tit" style="font-weight:bold;">车况信息</text>
 				<view class="con">
 				</view>
 				<text class="yticon icon-you">编辑</text>
 			</view>
-			<view class="share-section" @click="share">
+			<view class="share-section">
 				<text class="tit" style="font-size: 10px;">山豆根山豆根</text>
-			</view>
+			</view> -->
 		</view>
 		
 		<!-- 评价 -->
@@ -291,6 +311,14 @@
 							console.log('production_date'+res.data.data.car.production_date);
 							_self.carinfo=res.data.data.car;
 							_self.shouxu_info=res.data.data.shouxu_info;
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+							
+							}
 						}
 					}
 				});

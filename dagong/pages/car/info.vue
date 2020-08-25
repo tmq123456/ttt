@@ -5,9 +5,11 @@
 			<text class="cell-tip" v-if="carinfo.type==0">二手车</text>
 			<text class="cell-tip" v-if="carinfo.type==1">新车</text>
 		</view>
+		<view v-show="userinfo.uid==carinfo.merchant_id">
 		<view class="list-cell b-b">
 			<text class="cell-tit">车牌号</text>
 			<text class="cell-tip">{{carinfo.car_card}}</text>
+		</view>
 		</view>
 		<view class="list-cell b-b">
 			<text class="cell-tit">归属地</text>
@@ -57,9 +59,11 @@
 			<text class="cell-tit">质保里程</text>
 			<text class="cell-tip">{{carinfo.qa_kilo}}</text>
 		</view>
+		<view v-show="userinfo.uid==carinfo.merchant_id">
 		<view class="list-cell b-b">
 			<text class="cell-tit">预警库龄</text>
 			<text class="cell-tip">{{carinfo.warning_days}}</text>
+		</view>
 		</view>
 		<view class="list-cell b-b">
 			<text class="cell-tit">发动机号</text>
@@ -111,6 +115,14 @@
 							console.log('production_date'+res.data.data.car.production_date);
 							_self.carinfo=res.data.data.car;
 							_self.shouxu_info=res.data.data.shouxu_info;
+						}else{
+							if(res.data.code=== 401){
+								uni.navigateTo({
+									url: `/pages/public/login`
+								})
+							}else{
+						
+							}
 						}
 					}
 				});
@@ -119,9 +131,21 @@
 		},
 		methods:{
 			onNavigationBarButtonTap: async function(e) {
-				uni.navigateTo({
-					url: `/pages/car/editor?id=`+this.car_id
-				})
+				if(this.userinfo.type==10){
+					uni.navigateTo({
+						url: `/pages/car/editor?id=`+this.car_id
+					})
+				}
+				if(this.userinfo.type==1){
+					uni.navigateTo({
+						url: `/pages/car/editor1?id=`+this.car_id
+					})
+				}
+				if(this.userinfo.type==2){
+					uni.navigateTo({
+						url: `/pages/car/editor2?id=`+this.car_id
+					})
+				}
 			},
 		}
 	}

@@ -63,9 +63,11 @@ uni.getStorage({
 		Vue.prototype.access_token=this.list.access_token;
 		Vue.prototype.uid=this.list.uid;
 		Vue.prototype.username=this.list.username;
+		Vue.prototype.listdata=this.list;
 		console.log("uid是:" + this.list.uid)
 		console.log("用户名是:" + this.list.username)
 		console.log("token是:" + this.list.access_token)
+		console.log("listdata是:" + this.list.company_name)
 	},
 	fail:function(e){
 		uni.navigateTo({
